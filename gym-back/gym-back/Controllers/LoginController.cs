@@ -1,4 +1,5 @@
-﻿using gym_back.Services.Interfaces;
+﻿using gym_back.Model;
+using gym_back.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,16 +21,9 @@ namespace gym_back.Controllers
         }
         
         [HttpPost]
-        public string Login(string userId, string password)
+        public Account Login(string userId, string password)
         {
-            try
-            {
-                return this.loginService.LoginUser(userId, password);
-            }
-            catch
-            {
-                return "ok";
-            }
+            return this.loginService.LoginUser(userId, password);
         }
        
     }

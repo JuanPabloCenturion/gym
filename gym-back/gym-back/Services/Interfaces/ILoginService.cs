@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using gym_back.Model;
 
 namespace gym_back.Services.Interfaces
 {
     public interface ILoginService
     {
-        public string LoginUser(string userId, string password);
+        public Account LoginUser(string userId, string password);
     }
 }
