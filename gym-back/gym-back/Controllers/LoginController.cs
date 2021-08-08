@@ -1,5 +1,6 @@
 ﻿using gym_back.Model;
 using gym_back.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,9 +22,17 @@ namespace gym_back.Controllers
         }
         
         [HttpPost]
-        public Account Login(string userId, string password)
+        [AllowAnonymous]
+        public async Task<Account> LoginAsync(string userId, string password)
         {
-            return this.loginService.LoginUser(userId, password);
+            return await this.loginService.LoginUserAsync(userId, password);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public string Saludo()
+        {
+            return "Hola";
         }
        
     }

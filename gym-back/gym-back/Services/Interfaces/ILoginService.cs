@@ -1,9 +1,10 @@
 ﻿using gym_back.Model;
+using System.Threading.Tasks;
 
 namespace gym_back.Services.Interfaces
 {
     public interface ILoginService
     {
-        public Account LoginUser(string userId, string password);
+        public Task<Account> LoginUserAsync(string userId, string password);
     }
 }

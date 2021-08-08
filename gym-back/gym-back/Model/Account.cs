@@ -10,5 +10,6 @@ namespace gym_back.Model
         public int Id { get; set; }
         public string accountName { get; set; }
         public string password { get; set; }
+        public string token { get; set; }
     }
 }

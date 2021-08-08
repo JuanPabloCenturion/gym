@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace gym_back.Repositories
 {
-    public class AccountRepository
+    public class AccountRepository : IAccountRepository
     {
         private DbContextOptions<LoginContext> options;
+        private LoginContext context;
 
         public AccountRepository()
         {
@@ -17,24 +18,25 @@ namespace gym_back.Repositories
                                 .UseInMemoryDatabase(databaseName: "Test")
                                 .Options;
 
-            using (var context = new LoginContext(this.options))
-            {
+            //using (var context = new LoginContext(this.options))
+            //{
                 var account = new Account { accountName = "admin", password = "123" };
-                context.Accounts.Add(account);
-                context.SaveChanges();
-            }
+                this.context = new LoginContext(this.options);
+                this.context.Accounts.Add(account);
+                this.context.SaveChanges();
+            //}
         }
 
-        public Account GetAccount(string accountName)
+        public async Task<Account> GetAccountAsync(string accountName)
         {
-            using (var context = new LoginContext(this.options))
-            {
-                var searchedAccount = context.Accounts
+            //using (var context = new LoginContext(this.options))
+            //{
+                var searchedAccount = await this.context.Accounts
                     .Where( account => account.accountName == accountName)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
 
                 return searchedAccount;
-            }
+            //}
         }
     }
 }
